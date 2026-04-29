@@ -1,0 +1,4 @@
+exercice,repetitions_totales,repetitions_correctes,pourcentage_correct,duree_exercice_sec,duree_totale_sec,fps_moyen
+Squat,12,10,83.33,180.5,420.0,26.8
+Push-up,8,7,87.5,120.2,420.0,26.8
+Bicep Curl,15,14,93.33,119.3,420.0,26.8

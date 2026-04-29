@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Telco Churn Scoring API</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Manrope:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/static/css/styles.css" />
+  </head>
+  <body>
+    <div class="bg-orb orb-a"></div>
+    <div class="bg-orb orb-b"></div>
+
+    <main class="container">
+      <header class="hero">
+        <p class="chip">Machine Learning Deployment</p>
+        <h1>Telco Customer Churn Predictor</h1>
+        <p>
+          API de scoring prête à déployer avec interface décisionnelle pour les équipes CRM.
+        </p>
+      </header>
+
+      <section class="status-card">
+        {% if model_loaded %}
+        <span class="dot ok"></span> Modèle chargé: <code>{{ model_path }}</code>
+        {% else %}
+        <span class="dot ko"></span> Modèle introuvable: <code>{{ model_path }}</code>
+        {% endif %}
+      </section>
+
+      <section class="layout">
+        <form action="/predict" method="post" class="panel form-panel">
+          <h2>Profil client</h2>
+          <div class="grid">
+            <label>Gender
+              <select name="gender"><option>Male</option><option>Female</option></select>
+            </label>
+            <label>Senior Citizen
+              <select name="SeniorCitizen"><option value="0">No</option><option value="1">Yes</option></select>
+            </label>
+            <label>Partner
+              <select name="Partner"><option>No</option><option>Yes</option></select>
+            </label>
+            <label>Dependents
+              <select name="Dependents"><option>No</option><option>Yes</option></select>
+            </label>
+            <label>Tenure (mois)
+              <input type="number" name="tenure" value="12" min="0" required />
+            </label>
+            <label>Phone Service
+              <select name="PhoneService"><option>Yes</option><option>No</option></select>
+            </label>
+            <label>Multiple Lines
+              <select name="MultipleLines"><option>No</option><option>Yes</option><option>No phone service</option></select>
+            </label>
+            <label>Internet Service
+              <select name="InternetService"><option>DSL</option><option>Fiber optic</option><option>No</option></select>
+            </label>
+            <label>Online Security
+              <select name="OnlineSecurity"><option>No</option><option>Yes</option><option>No internet service</option></select>
+            </label>
+            <label>Online Backup
+              <select name="OnlineBackup"><option>No</option><option>Yes</option><option>No internet service</option></select>
+            </label>
+            <label>Device Protection
+              <select name="DeviceProtection"><option>No</option><option>Yes</option><option>No internet service</option></select>
+            </label>
+            <label>Tech Support
+              <select name="TechSupport"><option>No</option><option>Yes</option><option>No internet service</option></select>
+            </label>
+            <label>Streaming TV
+              <select name="StreamingTV"><option>No</option><option>Yes</option><option>No internet service</option></select>
+            </label>
+            <label>Streaming Movies
+              <select name="StreamingMovies"><option>No</option><option>Yes</option><option>No internet service</option></select>
+            </label>
+            <label>Contract
+              <select name="Contract"><option>Month-to-month</option><option>One year</option><option>Two year</option></select>
+            </label>
+            <label>Paperless Billing
+              <select name="PaperlessBilling"><option>Yes</option><option>No</option></select>
+            </label>
+            <label>Payment Method
+              <select name="PaymentMethod">
+                <option>Electronic check</option>
+                <option>Mailed check</option>
+                <option>Bank transfer (automatic)</option>
+                <option>Credit card (automatic)</option>
+              </select>
+            </label>
+            <label>Monthly Charges
+              <input type="number" step="0.01" min="0" name="MonthlyCharges" value="70.00" required />
+            </label>
+            <label>Total Charges
+              <input type="number" step="0.01" min="0" name="TotalCharges" value="840.00" required />
+            </label>
+          </div>
+
+          <button type="submit">Lancer le scoring</button>
+        </form>
+
+        <aside class="panel result-panel">
+          <h2>Résultat</h2>
+          {% if result and result.error %}
+          <div class="result error">
+            <p>Erreur: {{ result.error }}</p>
+          </div>
+          {% elif result %}
+          <div class="result">
+            <p class="kpi">Probabilité de churn</p>
+            <p class="score">{{ result.probability }}%</p>
+            <p class="risk">Risque: <strong>{{ result.risk_level }}</strong></p>
+            <p>Classe prédite: <strong>{{ result.prediction }}</strong> (1 = churn, 0 = no churn)</p>
+          </div>
+          {% else %}
+          <div class="result placeholder">
+            <p>Complète le formulaire puis lance le scoring pour obtenir une probabilité de churn.</p>
+          </div>
+          {% endif %}
+
+        </aside>
+      </section>
+    </main>
+  </body>
+</html>

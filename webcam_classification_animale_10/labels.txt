@@ -1,0 +1,10 @@
+Chien
+Cheval
+Elephant
+Papillon
+Poulet
+Chat
+Vache
+Mouton
+Araignée
+Ecureuil

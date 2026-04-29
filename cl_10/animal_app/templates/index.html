@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Animal-10 Classifier</title>
+    <link rel="stylesheet" href="/static/style.css?v=2" />
+  </head>
+  <body>
+    <main class="page">
+      <div class="bg-orb orb-1"></div>
+      <div class="bg-orb orb-2"></div>
+      <div class="bg-orb orb-3"></div>
+
+      <section class="card">
+        <header class="header">
+          <div class="badge">Animal-10</div>
+          <h1>Reconnaissance d'animaux</h1>
+          <p>Charge une image et obtiens la prediction de l'animal.</p>
+          <p class="hint">Animaux supportés :</p>
+          <div class="chips">
+            <span>Chien</span>
+            <span>Cheval</span>
+            <span>Éléphant</span>
+            <span>Papillon</span>
+            <span>Poule</span>
+            <span>Chat</span>
+            <span>Vache</span>
+            <span>Mouton</span>
+            <span>Araignée</span>
+            <span>Écureuil</span>
+          </div>
+        </header>
+
+        <div class="uploader">
+          <label class="dropzone" for="fileInput">
+            <input id="fileInput" type="file" accept="image/*" />
+            <div class="drop-content">
+              <div class="icon">+</div>
+              <div class="text">
+                <span>Depose ton image ici</span>
+                <small>ou clique pour choisir un fichier</small>
+              </div>
+            </div>
+          </label>
+          <div class="preview" id="preview"></div>
+        </div>
+
+        <div class="actions">
+          <button id="predictBtn" disabled>Predire</button>
+          <div class="status" id="status">En attente d'une image...</div>
+        </div>
+
+        <div class="result" id="result"></div>
+        <div class="footer-note"></div>
+      </section>
+    </main>
+
+    <script src="/static/app.js?v=2"></script>
+  </body>
+</html>

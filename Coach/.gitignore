@@ -2,3 +2,6 @@ __pycache__/
 *.pyc
 .venv/
 sorties/
+node_modules/
+.cache/
+*.log
